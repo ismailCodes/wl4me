@@ -22,3 +22,14 @@ describe("Newly deployed contract", function () {
     );
   });
 });
+
+describe("Adding a project", function () {
+  it("Should add a project", async function () {
+    const Whitelister = await ethers.getContractFactory("Whitelister");
+    const whitelister = await Whitelister.deploy();
+    await whitelister.deployed();
+
+    await whitelister.addProject("Project 1", 10);
+    expect((await whitelister.projects(0)).name).to.equal("Project 1");
+  });
+});
