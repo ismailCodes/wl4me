@@ -54,4 +54,11 @@ contract Whitelister {
         projects[idCounter].owner = msg.sender;
         idCounter += 1;
     }
+
+    /**
+        isWhitelisted - This function checks if the address is whitelisted in the project
+     */
+    function isWhitelisted(uint256 projectId, address _address) public view returns (bool) {
+        return projects[projectId].whitelistedAddresses[_address];
+    }
 }
