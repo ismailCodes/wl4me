@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
+require("solidity-coverage");
 
 describe("Whitelister", function () {
   it("Should return false for a non existing project", async function () {
@@ -141,5 +142,22 @@ describe("Whitelister", function () {
     await expect(
       whitelister.connect(account1).toggleWhitelisting(0)
     ).to.be.revertedWith("You are not the owner");
+  });
+
+  it("Should revert if project whitelisting limit is reached", async function () {
+    const Whitelister = await ethers.getContractFactory("Whitelister");
+    const whitelister = await Whitelister.deploy();
+    await whitelister.deployed();
+
+    const [account1, account2, account3] = await ethers.getSigners();
+
+    await whitelister.addProject("Project 1", 2);
+
+    await whitelister.connect(account1).addAddressToWhitelist(0);
+    await whitelister.connect(account2).addAddressToWhitelist(0);
+
+    await expect(
+      whitelister.connect(account3).addAddressToWhitelist(0)
+    ).to.be.revertedWith("Limit reached");
   });
 });
