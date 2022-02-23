@@ -61,6 +61,7 @@ contract Whitelister {
         public
         activeWhitelisting(projectId)
         notAlreadyWhitelisted(projectId, msg.sender)
+        whitelistingLimit(projectId)
     {
         // Add the address which called the function to the whitelistedAddress array
         projects[projectId].whitelistedAddresses[msg.sender] = true;
