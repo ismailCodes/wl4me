@@ -1,1 +1,16 @@
-{}
+{
+  "printWidth": 100,
+  "tabWidth": 4,
+  "useTabs": true,
+  "semi": true,
+  "singleQuote": true,
+  "quoteProps": "consistent",
+  "jsxSingleQuote": false,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "arrowParens": "avoid",
+  "endOfLine": "auto",
+  "importOrder": ["^src", "^[./]", "[^-]components/(.*)$"],
+  "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": true
+}
